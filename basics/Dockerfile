@@ -2,11 +2,11 @@ FROM node:4.6 as unittest
 RUN sleep 5
 RUN echo " Unit Test"
 
-FROM node:4.6 as code coverage
+FROM unitest as codecoverage
 RUN sleep 5
 RUN echo " code covergae"
 
-FROM node:4.6 as final
+FROM codecoverage as final
 WORKDIR /app
 ADD . /app
 
