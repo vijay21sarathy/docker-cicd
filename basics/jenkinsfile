@@ -4,17 +4,23 @@ pipeline {
         stage("Docker Build and SonarQube") {
             parallel {
                 stage("Docker Build") {
-                   script {
-                     def app = docker.build("vijay21sarathy/docker-nodejs-demo:${commit_id}", './basics')
-                   }
+                  steps {
+                     script {
+                       def app = docker.build("vijay21sarathy/docker-nodejs-demo:${commit_id}", './basics')
+                     }
+                  }
                 }
                 stage("Sonarqube") {
-                      sh("echo 'stage sonarqube test'")
+                  steps {
+                     sh("echo 'stage sonarqube test'")
+                  }
                 }
             }
         }
         stage("docker build/push") {            
-          echo "Stage Docker push"
+          steps {
+             echo "Stage Docker push"
+          }
         }        
     }
 }
