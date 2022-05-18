@@ -1,16 +1,18 @@
-FROM node:4.6 as unittest
-RUN sleep 5
-RUN echo " Unit Test"
+FROM ubuntu:latest as coverage
+RUN sleep 10
+RUN echo "Run coverage"
 
-FROM node:4.6 as codecoverage
-RUN sleep 5
-RUN echo " code covergae"
+FROM alpine:latest as unittest
+RUN sleep 10
+RUN echo "Run unit tests"
 
-FROM node:4.6 as final
+FROM node:4.6 as finalartifact
+RUN sleep 10
+RUN echo "produce artifact"
+
 WORKDIR /app
 ADD . /app
 
-RUN echo " final artifact"
 RUN npm install
 EXPOSE 3000
 CMD npm start
